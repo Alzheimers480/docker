@@ -48,7 +48,12 @@ if(newUser($_POST["USERNAME"], $_POST["PASSWORD"], $_POST["PASSWORD2"], $_POST["
 	$name = $_POST["USERNAME"];
 	$subject = "Welcome to the Who R U";	
 	$message = "192.168.99.100/email.php?USERNAME=$name";
-	mail($mail, $subject, $message);
+	if(mail($mail, $subject, $message)){
+		echo "mail sent";
+	}
+	else{
+		echo "NOOOOOO";
+	}
 }
 else{
 	echo "False";

@@ -40,10 +40,9 @@ $fail = false;
 session_start();
 if(newAcqua($id, $fname, $lname)){
 	echo "New Acquaintance Created";
-	$dir = "/SECS/home/s/scnolton/facePics/$id";
+	$dir = "/var/www/html/facePics/$id";
 	if (!file_exists($dir)){
-		$oldmask = umask(0);
-		mkdir ($dir, 0777);
+		mkdir($dir);
 	}
 	else{
 		echo " dir already exists!";
