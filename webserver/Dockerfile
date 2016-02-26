@@ -1,8 +1,6 @@
 FROM php:5.6-apache
 MAINTAINER David Keller <dnkeller@oakland.edu>
 RUN docker-php-ext-install mysqli
-COPY config/php.ini /usr/local/etc/php/
-COPY src/ /var/www/html/
 
 # OpenCV install
 RUN apt-get update && apt-get install build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev -y
@@ -16,6 +14,10 @@ RUN apt-get install unzip -y && cd /root/facerec/ && ldconfig && chmod +x build 
 # Fix for the ln command by modifying apache2-foreground
 COPY config/apache2-foreground /usr/local/bin/apache2-foreground
 RUN chmod +x /usr/local/bin/apache2-foreground
+
+# server code
+COPY config/php.ini /usr/local/etc/php/
+COPY src/ /var/www/html/
 
 # From master
 RUN mkdir /var/www/html/facePics
