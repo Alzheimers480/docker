@@ -10,6 +10,7 @@ RUN cd ~ && mkdir opencv/release/ && cd opencv/release/ && cmake -D OPENCV_EXTRA
 # Build my openCV cpp code
 COPY facerec/ /root/facerec
 RUN apt-get install unzip -y && cd /root/facerec/ && ldconfig && chmod +x build && ./build && unzip testdata.zip && chmod +x create_csv.py && ./create_csv.py testdata/model > my.csv
+RUN chmod 777 /root && chmod 777 -R /root/facerec
 
 # Fix for the ln command by modifying apache2-foreground
 COPY config/apache2-foreground /usr/local/bin/apache2-foreground
@@ -22,3 +23,5 @@ COPY src/ /var/www/html/
 # From master
 RUN mkdir /var/www/html/facePics
 RUN chmod -R 777 /var
+RUN chown www-data:www-data /root
+RUN chown www-data:www-data /root/facerec -R

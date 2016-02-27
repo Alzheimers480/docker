@@ -37,7 +37,7 @@ int main(int argc, const char *argv[]) {
   if(std::string(argv[1]) == "train") {
     read_csv(argv[2], images, labels);
     model->train(images,labels);
-    model->save("model.xml");
+    model->save("/root/facerec/model.xml");
   }
   else if(std::string(argv[1]) == "predict") {
     Mat guess = imread(argv[2], CV_LOAD_IMAGE_GRAYSCALE);
