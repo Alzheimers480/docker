@@ -7,14 +7,16 @@ RUN apt-get update && apt-get install build-essential cmake git libgtk2.0-dev pk
 RUN cd ~ && git clone https://github.com/Itseez/opencv.git && git clone https://github.com/itseez/opencv_contrib
 RUN cd ~ && mkdir opencv/release/ && cd opencv/release/ && cmake -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_CUDA=OFF .. && make -j7 && make install
 
-# Build my openCV cpp code
-COPY facerec/ /root/facerec
-RUN apt-get install unzip -y && cd /root/facerec/ && ldconfig && chmod +x build && ./build && unzip testdata.zip && chmod +x create_csv.py && ./create_csv.py testdata/model > my.csv
-RUN chmod 777 /root && chmod 777 -R /root/facerec
-
 # Fix for the ln command by modifying apache2-foreground
 COPY config/apache2-foreground /usr/local/bin/apache2-foreground
 RUN chmod +x /usr/local/bin/apache2-foreground
+
+# Build my openCV cpp code
+COPY facerec/ /var/www/facerec
+RUN apt-get install unzip -y && cd /var/www/facerec/ && ldconfig && chmod +x build && ./build && unzip testdata.zip && chmod +x create_csv.py && ./create_csv.py testdata/model > my.csv
+RUN chmod 777 /var/www/ && chmod 777 -R /var/www/facerec
+RUN chown www-data:www-data /var/www -R
+
 
 # server code
 COPY config/php.ini /usr/local/etc/php/
@@ -23,5 +25,6 @@ COPY src/ /var/www/html/
 # From master
 RUN mkdir /var/www/html/facePics
 RUN chmod -R 777 /var
-RUN chown www-data:www-data /root
-RUN chown www-data:www-data /root/facerec -R
+
+# RUN chown www-data:www-data /root
+# RUN chown www-data:www-data /root/facerec -R

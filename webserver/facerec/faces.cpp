@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <stdlib.h>
 
 using namespace cv;
 using namespace cv::face;
@@ -37,11 +38,12 @@ int main(int argc, const char *argv[]) {
   if(std::string(argv[1]) == "train") {
     read_csv(argv[2], images, labels);
     model->train(images,labels);
-    model->save("/root/facerec/model.xml");
+    model->save("/var/www/facerec/model.xml");
+    system("chown www-data:www-data /var/www/facerec/model.xml");
   }
   else if(std::string(argv[1]) == "predict") {
     Mat guess = imread(argv[2], CV_LOAD_IMAGE_GRAYSCALE);
-    model->load("/root/facerec/model.xml");
+    model->load("/var/www/facerec/model.xml");
     int label;
     label = model->predict(guess);
     cout << "Label:" << label+1 << endl;
