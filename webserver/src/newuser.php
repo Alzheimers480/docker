@@ -44,6 +44,11 @@ $fail=false;
 session_start();
 if(newUser($_POST["USERNAME"], $_POST["PASSWORD"], $_POST["PASSWORD2"], $_POST["FNAME"], $_POST["LNAME"], $_POST["EMAIL"])) {
 	echo "True";
+
+	//make folder for every new user
+	$dir = "/var/www/html/facePics/".$_POST["USERNAME"];
+	mkdir($dir);
+
 	$mail = $_POST["EMAIL"];
 	$name = $_POST["USERNAME"];
 	$subject = "Welcome to the Who R U";	
