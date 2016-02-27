@@ -17,7 +17,6 @@ RUN apt-get install unzip -y && cd /var/www/facerec/ && ldconfig && chmod +x bui
 RUN chmod 777 /var/www/ && chmod 777 -R /var/www/facerec
 RUN chown www-data:www-data /var/www -R
 
-
 # server code
 COPY config/php.ini /usr/local/etc/php/
 COPY src/ /var/www/html/
@@ -25,6 +24,3 @@ COPY src/ /var/www/html/
 # From master
 RUN mkdir /var/www/html/facePics
 RUN chmod -R 777 /var
-
-# RUN chown www-data:www-data /root
-# RUN chown www-data:www-data /root/facerec -R

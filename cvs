@@ -1,0 +1,2 @@
+# stands for OpenCV sanity check
+curl $(docker-machine ip cv)/cv.php

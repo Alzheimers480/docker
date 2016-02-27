@@ -1,0 +1,1 @@
+docker exec -it mydockers_web_1 bash

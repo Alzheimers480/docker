@@ -24,7 +24,7 @@ If something is wrong the script will echo one of the following:
 When a new user is created email.php is sent to the the user. when the user clics the link his or her email becomes verified.
 
 Here is an example curl for newuser.php:
-curl -L <docker-machine IP>/newuser.php --data "USERNAME=switch202&PASSWORD=password&PASSWORD2=password&FNAME=Grumpy&LNAME=OldFart&EMAIL=scnolton@oakland.edu"
+curl -L $(docker-machine ip cv)/newuser.php --data "USERNAME=switch202&PASSWORD=password&PASSWORD2=password&FNAME=Grumpy&LNAME=OldFart&EMAIL=scnolton@oakland.edu"
 It should return "New User Created"
 ---------------------newuser.php-----------------------
 
@@ -101,6 +101,6 @@ for now you will want to name the picture after the acquantence ID. so when you 
 so your pic should be named loopy.jpg or loopy.png
 if everything worked you should get an echo back saying "Yay"
 here is an exmaple curl:
-curl -L <docker-machine IP>geetPics.php -F "PIC1=@/loopy.jpg"
+curl -L $(docker-machine ip cv)/getPics.php -F "PIC1=@/loopy.jpg"
 the @/loop.jpg is where your file path to the picture you want to send goes. mine just happens to be in the same dir as I cam calling this comand from.
 ---------------------getPics.php-----------------------
