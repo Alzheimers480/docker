@@ -9,4 +9,7 @@ foreach ($_FILES["pics"]["error"] as $key => $error) {
         move_uploaded_file($tmp_name, "$uploads_dir/$name");
     }
 }
+
+$dir = "/var/www/html/facePics/".$_POST['USERNAME'];
+exec("/var/www/facerec/create_csv.py ".$dir." > ".$dir."/csv");
 ?>
