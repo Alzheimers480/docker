@@ -10,6 +10,10 @@ curl -L $(docker-machine ip cv)/newacqu.php --data "USERNAME=scooby&FNAME=Slippi
 # relate them
 curl -L $(docker-machine ip cv)/relate.php -F "USERNAME=switch202" -F "ACQUNAME=ruby" -F "RELATION=brother" -F "MESSAGE=my older brother. he is so cool." -F "pics[]=@testdata/model/s01/1.pgm" -F "pics[]=@testdata/model/s01/2.pgm" -F "pics[]=@testdata/model/s01/3.pgm"
 curl -L $(docker-machine ip cv)/relate.php -F "USERNAME=switch202" -F "ACQUNAME=looby" -F "RELATION=brother" -F "MESSAGE=my younger brother. not so cool." -F "pics[]=@testdata/model/s02/1.pgm" -F "pics[]=@testdata/model/s02/2.pgm" -F "pics[]=@testdata/model/s02/3.pgm"
+
+# predict
+curl -L $(docker-machine ip cv)/predict.php -F "pic=@testdata/test/s02/8.pgm" -F "USERNAME=switch202"
+
 # curl -L $(docker-machine ip cv)/relate.php --data "USERNAME=switch202&ACQUNAME=looby&RELATION=brother&MESSAGE=my younger brother. he is not cool."
 # curl -L $(docker-machine ip cv)/relate.php --data "USERNAME=switch201&ACQUNAME=looby&RELATION=brother&MESSAGE=always slippin."
 
