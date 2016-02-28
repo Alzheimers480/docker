@@ -44,6 +44,8 @@ $fail = false;
 session_start();
 if(newRelation($_POST["USERNAME"], $_POST["ACQUNAME"], $_POST["RELATION"], $_POST["MESSAGE"])){
 	echo "True";
+	$dir = "/var/www/html/facePics/".$_POST["USERNAME"]."/".$_POST["ACQUNAME"];
+	mkdir($dir);
 }
 else{
 	echo "False";

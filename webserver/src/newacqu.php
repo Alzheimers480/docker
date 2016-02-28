@@ -40,16 +40,10 @@ $fail = false;
 session_start();
 if(newAcqua($id, $fname, $lname)){
 	echo "New Acquaintance Created";
-	$dir = "/var/www/html/facePics/$id";
-	if (!file_exists($dir)){
-		mkdir($dir);
-	}
-	else{
-		echo " dir already exists!";
-	}
 }
 else{
 	echo "Unable to Create New Acquaintance";
 }
+
 
 ?>

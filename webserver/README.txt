@@ -58,10 +58,9 @@ These are the various echos the script can return. you can figure out whan and w
 "New Acquaintance Created"
 "one or more paramters missing Unable to Create New Acquaintance"
 "Acquaintance already exists Unable to Create New Acquaintance"
-<<<<<<< HEAD
 "New Acquaintance Created dir already exists!"(the way I have it programed this last one should never happen unless someone deltes a user from the database but doesn't dealete the corisponding dir)
 here is a curl you can use to test. make sure you keep the database in order though:
-curl -L <docker-machine IP>/newacqu.php --data "USERNAME=loopy&FNAME=Grumpy&LNAME=OldFart"
+curl -L $(docker-machine ip cv)/newacqu.php --data "USERNAME=loopy&FNAME=Grumpy&LNAME=OldFart"
 ---------------------newacqua.php-----------------------
 
 ---------------------relate.php-----------------------
@@ -74,7 +73,7 @@ these are the various Echos possible
 "conn failure False"
 "one of the feilds was blank False"
 here is an example curl you can use to test. make sure you access the database through phpMyAdmin.
-curl -L <docker-machine IP>/relate.php --data "USERNAME=switch202&ACQUNAME=loopy&RELATION=brother&MESSAGE=my older brother. he is so cool."
+curl -L $(docker-machine ip cv)/relate.php --data "USERNAME=switch202&ACQUNAME=loopy&RELATION=brother&MESSAGE=my older brother. he is so cool."
 ---------------------relate.php-----------------------
 
 

@@ -1,13 +1,12 @@
 <?php
 session_start();
-$fileName = $_FILES['PIC1']['name'];
-echo $fileName
-$acqu = substr(0, strlen($fileName)-3);
-echo $acqu;
-if(move_uploaded_file($_FILES['PIC1']['tmp_name'], "/var/www/html/facePics/$acqu/pic1")){
-	echo "Yay";
-}
-else{
-	echo "No";
+
+$uploads_dir = "/var/www/html/facePics/".$_POST['USERNAME']."/".$_POST['ACQ_NAME'];
+foreach ($_FILES["pics"]["error"] as $key => $error) {
+    if ($error == UPLOAD_ERR_OK) {
+        $tmp_name = $_FILES["pics"]["tmp_name"][$key];
+        $name = $_FILES["pics"]["name"][$key];
+        move_uploaded_file($tmp_name, "$uploads_dir/$name");
+    }
 }
 ?>
