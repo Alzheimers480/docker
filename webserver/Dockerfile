@@ -12,8 +12,9 @@ COPY config/apache2-foreground /usr/local/bin/apache2-foreground
 RUN chmod +x /usr/local/bin/apache2-foreground
 
 # Build my openCV cpp code
+RUN apt-get install unzip vim -y
 COPY facerec/ /var/www/facerec
-RUN apt-get install unzip -y && cd /var/www/facerec/ && ldconfig && chmod +x build && ./build && unzip testdata.zip && chmod +x create_csv.py && ./create_csv.py testdata/model > my.csv
+RUN cd /var/www/facerec/ && ldconfig && chmod +x build && ./build && chmod +x create_csv.py
 RUN chmod 777 /var/www/ && chmod 777 -R /var/www/facerec
 RUN chown www-data:www-data /var/www -R
 
