@@ -1,0 +1,2 @@
+#remotely refresh docker procs
+ssh -l scnolton -t 141.210.25.46 "cd /home/scnolton/docker && sudo ./r"
