@@ -47,11 +47,11 @@ if(newUser($_POST["USERNAME"], $_POST["PASSWORD"], $_POST["PASSWORD2"], $_POST["
 
 	//make folder for every new user
 	$dir = "/var/www/html/facePics/".$_POST["USERNAME"];
-	echo $dir;
+
 	mkdir($dir);
 	//make csv file
 	$file = $dir."/csv";
-	echo $file;
+
 	touch($file);
 
 	$mail = $_POST["EMAIL"];
