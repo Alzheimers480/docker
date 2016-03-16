@@ -46,14 +46,55 @@ out=`curl -s $host/newacqu.php -F \
 "LNAME=Zineberg"`
 mytest "$out" "$expect"
 
-expect="True"
+expect="user already exists False"
 out=`curl -s $host/newuser.php -F \
 "USERNAME=switch202" -F \
 "PASSWORD=nimrod" -F \
-"PASSWORD2=nimoy" -F \
+"PASSWORD2=nimrod" -F \
 "FNAME=Smorty" -F \
 "LNAME=Gringlestein" -F \
 "EMAIL=ramseybolton@oakland.edu"`
+mytest "$out" "$expect"
+
+expect="False"
+out=`curl -s $host/auth.php -F \
+"USERNAME=switch202" -F \
+"PASSWORD=nimrod"`
+mytest "$out" "$expect"
+
+# Test auth with wrong password
+# This test is failing
+expect="False"
+out=`curl -s $host/auth.php -F \
+"USERNAME=switch202" -F \
+"PASSWORD=passwordiord"`
+mytest "$out" "$expect"
+
+expect="True"
+out=`curl -s $host/auth.php -F \
+"USERNAME=switch202" -F \
+"PASSWORD=password"`
+mytest "$out" "$expect"
+
+
+# Changepass doesn't ask for the old password?
+expect="True"
+out=`curl -s $host/changepass.php -F \
+"USERNAME=switch202" -F \
+"PASSWORD=monster" -F \
+"PASSWORD2=monster"`
+mytest "$out" "$expect"
+
+expect="False"
+out=`curl -s $host/auth.php -F \
+"USERNAME=switch202" -F \
+"PASSWORD=password"`
+mytest "$out" "$expect"
+
+expect="True"
+out=`curl -s $host/auth.php -F \
+"USERNAME=switch202" -F \
+"PASSWORD=monster"`
 mytest "$out" "$expect"
 
 expect="New Acquaintance Created"
@@ -82,6 +123,24 @@ out=`curl -s $host/newacqu.php -F \
 "USERNAME=jc" -F \
 "FNAME=Jimmy" -F \
 "LNAME=Cringles"`
+mytest "$out" "$expect"
+
+expect="Acuqintance ID does not exists False"
+out=`curl -s $host/relate.php -F \
+"USERNAME=switch202" -F \
+"ACQUNAME=kk" -F \
+"RELATION=CareTaker" -F \
+"MESSAGE=He gives you your medication." -F \
+"pics[]=@testdata/model/s07/1.pgm" -F \
+"pics[]=@testdata/model/s07/2.pgm" -F \
+"pics[]=@testdata/model/s07/3.pgm"`
+mytest "$out" "$expect"
+
+expect="New Acquaintance Created"
+out=`curl -s $host/newacqu.php -F \
+"USERNAME=kk" -F \
+"FNAME=Kenny" -F \
+"LNAME=Kreepy"`
 mytest "$out" "$expect"
 
 expect="True"
@@ -144,7 +203,7 @@ out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
 "ACQUNAME=jc" -F \
 "RELATION=Grandson" -F \
-"MESSAGE=My grandson. He's a twerp." -F \
+"MESSAGE=He's a twerp." -F \
 "pics[]=@testdata/model/s06/1.pgm" -F \
 "pics[]=@testdata/model/s06/2.pgm" -F \
 "pics[]=@testdata/model/s06/3.pgm"`
@@ -217,4 +276,26 @@ fi
 
 curl -sL $host/predict.php -F "pic=@testdata/test/s06/8.pgm" -F "USERNAME=switch202" -o outfile
 awk -f my.awk outfile > info
-cat info
+fname=`sed '3q;d' info`
+lname=`sed '4q;d' info`
+relation=`sed '5q;d' info`
+mess=`sed '6q;d' info`
+if [ "$fname" == "Jimmy" ] && [ "$lname" == "Cringles" ] && [ "$relation" == "Grandson" ] && [ "$mess" == "He's a twerp." ]
+then echo "Test passed"
+else
+    echo "Test failed"
+    cat info
+fi
+
+curl -sL $host/predict.php -F "pic=@testdata/test/s07/8.pgm" -F "USERNAME=switch202" -o outfile
+awk -f my.awk outfile > info
+fname=`sed '3q;d' info`
+lname=`sed '4q;d' info`
+relation=`sed '5q;d' info`
+mess=`sed '6q;d' info`
+if [ "$fname" == "Kenny" ] && [ "$lname" == "Kreepy" ] && [ "$relation" == "CareTaker" ] && [ "$mess" == "He gives you your medication." ]
+then echo "Test passed"
+else
+    echo "Test failed"
+    cat info
+fi
