@@ -125,6 +125,7 @@ out=`curl -s $host/newacqu.php -F \
 "LNAME=Cringles"`
 mytest "$out" "$expect"
 
+# Test 15 
 expect="Acuqintance ID does not exists False"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
@@ -136,6 +137,7 @@ out=`curl -s $host/relate.php -F \
 "pics[]=@testdata/model/s07/3.pgm"`
 mytest "$out" "$expect"
 
+# Test 16
 expect="New Acquaintance Created"
 out=`curl -s $host/newacqu.php -F \
 "USERNAME=kk" -F \
@@ -143,6 +145,7 @@ out=`curl -s $host/newacqu.php -F \
 "LNAME=Kreepy"`
 mytest "$out" "$expect"
 
+# Test 17
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
@@ -154,6 +157,7 @@ out=`curl -s $host/relate.php -F \
 "pics[]=@testdata/model/s01/3.pgm"`
 mytest "$out" "$expect"
 
+# Test 18
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
@@ -165,6 +169,7 @@ out=`curl -s $host/relate.php -F \
 "pics[]=@testdata/model/s02/3.pgm"`
 mytest "$out" "$expect"
 
+# Test 19
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
@@ -176,6 +181,7 @@ out=`curl -s $host/relate.php -F \
 "pics[]=@testdata/model/s03/3.pgm"`
 mytest "$out" "$expect"
 
+# Test 20
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switcher" -F \
@@ -187,6 +193,7 @@ out=`curl -s $host/relate.php -F \
 "pics[]=@testdata/model/s02/3.pgm"`
 mytest "$out" "$expect"
 
+# Test 21
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switcher" -F \
@@ -198,6 +205,7 @@ out=`curl -s $host/relate.php -F \
 "pics[]=@testdata/model/s04/3.pgm"`
 mytest "$out" "$expect"
 
+# Test 22
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
@@ -209,6 +217,7 @@ out=`curl -s $host/relate.php -F \
 "pics[]=@testdata/model/s06/3.pgm"`
 mytest "$out" "$expect"
 
+# Test 23
 curl -sL $host/predict.php -F "pic=@testdata/test/s02/8.pgm" -F "USERNAME=switch202" -o outfile
 awk -f my.awk outfile > info
 fname=`sed '3q;d' info`
@@ -222,6 +231,7 @@ else
     cat info
 fi
 
+# Test 24
 curl -sL $host/predict.php -F "pic=@testdata/test/s03/8.pgm" -F "USERNAME=switch202" -o outfile
 awk -f my.awk outfile > info
 fname=`sed '3q;d' info`
@@ -235,6 +245,7 @@ else
     cat info
 fi
 
+# Test 25
 curl -sL $host/predict.php -F "pic=@testdata/test/s01/8.pgm" -F "USERNAME=switch202" -o outfile
 awk -f my.awk outfile > info
 fname=`sed '3q;d' info`
@@ -248,6 +259,7 @@ else
     cat info
 fi
 
+# Test 26
 curl -sL $host/predict.php -F "pic=@testdata/test/s02/8.pgm" -F "USERNAME=switcher" -o outfile
 awk -f my.awk outfile > info
 fname=`sed '3q;d' info`
@@ -261,6 +273,7 @@ else
     cat info
 fi
 
+# Test 27
 curl -sL $host/predict.php -F "pic=@testdata/test/s04/8.pgm" -F "USERNAME=switcher" -o outfile
 awk -f my.awk outfile > info
 fname=`sed '3q;d' info`
@@ -274,6 +287,7 @@ else
     cat info
 fi
 
+# Test 28
 curl -sL $host/predict.php -F "pic=@testdata/test/s06/8.pgm" -F "USERNAME=switch202" -o outfile
 awk -f my.awk outfile > info
 fname=`sed '3q;d' info`
@@ -287,6 +301,7 @@ else
     cat info
 fi
 
+# Test 29
 curl -sL $host/predict.php -F "pic=@testdata/test/s07/8.pgm" -F "USERNAME=switch202" -o outfile
 awk -f my.awk outfile > info
 fname=`sed '3q;d' info`
