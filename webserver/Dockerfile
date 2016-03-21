@@ -14,7 +14,7 @@ RUN chmod +x /usr/local/bin/apache2-foreground
 # Build my openCV cpp code
 RUN apt-get install unzip vim -y
 COPY facerec/ /var/www/facerec
-RUN cd /var/www/facerec/ && ldconfig && chmod +x build && ./build && chmod +x create_csv.py
+RUN cd /var/www/facerec/ && ldconfig && chmod +x build && sync && ./build && chmod +x create_csv.py
 RUN chmod 777 /var/www/ && chmod 777 -R /var/www/facerec
 RUN chown www-data:www-data /var/www -R
 
@@ -25,3 +25,10 @@ COPY src/ /var/www/html/
 # From master
 RUN mkdir /var/www/html/facePics
 RUN chmod -R 777 /var
+RUN apt-get -y install mailutils
+RUN apt-get -y install expect
+COPY config/emailConfig.sh /
+RUN cd /
+RUN chmod 777 /emailConfig.sh
+RUN /emailConfig.sh
+RUN service exim4 restart
