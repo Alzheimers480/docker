@@ -1,0 +1,7 @@
+#remotely refresh docker procs
+
+# this script refreshes the docker containers so you'll need to wait (probably 30 secs)
+# before you can run server functionality tests (./tac)
+#you'll also need to know the password for the server
+
+ssh -l scnolton -t 141.210.25.46 "cd /home/scnolton/docker && sudo ./r"
