@@ -50,8 +50,10 @@ int main(int argc, const char *argv[]) {
     Mat guess = imread(argv[2], CV_LOAD_IMAGE_GRAYSCALE);
     model->load(model_path);
     int label;
-    label = model->predict(guess);
+    double confidence;
+    model->predict(guess, label, confidence);
     cout << label << endl;
+    cout << confidence << endl;
   }
   else {
     cout << "Cli Usage Error" << endl;

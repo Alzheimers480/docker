@@ -5,8 +5,8 @@
 # To run this server functionality test, you first need to restart the server
 # the remoter script should work, if not, read the source code which shows
 # how to remotely restart the server
-
 host=141.210.25.46
+#host=192.168.99.100
 
 # create users
 # do we really want passord dupe checking server side?
@@ -53,7 +53,7 @@ out=`curl -s $host/newuser.php -F \
 "PASSWORD2=nimrod" -F \
 "FNAME=Smorty" -F \
 "LNAME=Gringlestein" -F \
-"EMAIL=ramseybolton@oakland.edu"`
+"EMAIL=scnolton@oakland.edu"`
 mytest "$out" "$expect"
 
 expect="False"
@@ -219,98 +219,45 @@ mytest "$out" "$expect"
 
 # Test 23
 curl -sL $host/predict.php -F "pic=@testdata/test/s02/8.pgm" -F "USERNAME=switch202" -o outfile
-awk -f my.awk outfile > info
-fname=`sed '3q;d' info`
-lname=`sed '4q;d' info`
-relation=`sed '5q;d' info`
-mess=`sed '6q;d' info`
-if [ "$fname" == "Larry" ] && [ "$lname" == "McDermin" ] && [ "$relation" == "brother" ] && [ "$mess" == "My younger brother. He's so cool." ]
-then echo "Test passed"
-else
-    echo "Test failed"
-    cat info
-fi
+cat outfile
 
 # Test 24
 curl -sL $host/predict.php -F "pic=@testdata/test/s03/8.pgm" -F "USERNAME=switch202" -o outfile
-awk -f my.awk outfile > info
-fname=`sed '3q;d' info`
-lname=`sed '4q;d' info`
-relation=`sed '5q;d' info`
-mess=`sed '6q;d' info`
-if [ "$fname" == "Smiles" ] && [ "$lname" == "McDermin" ] && [ "$relation" == "Son" ] && [ "$mess" == "My son who brings light and joy into the world" ]
-then echo "Test passed"
-else
-    echo "Test failed"
-    cat info
-fi
+cat outfile
 
 # Test 25
 curl -sL $host/predict.php -F "pic=@testdata/test/s01/8.pgm" -F "USERNAME=switch202" -o outfile
-awk -f my.awk outfile > info
-fname=`sed '3q;d' info`
-lname=`sed '4q;d' info`
-relation=`sed '5q;d' info`
-mess=`sed '6q;d' info`
-if [ "$fname" == "Mark" ] && [ "$lname" == "Zineberg" ] && [ "$relation" == "Grandson" ] && [ "$mess" == "My least favorite grandson. He just stays in his room." ]
-then echo "Test passed"
-else
-    echo "Test failed"
-    cat info
-fi
+cat outfile
 
 # Test 26
 curl -sL $host/predict.php -F "pic=@testdata/test/s02/8.pgm" -F "USERNAME=switcher" -o outfile
-awk -f my.awk outfile > info
-fname=`sed '3q;d' info`
-lname=`sed '4q;d' info`
-relation=`sed '5q;d' info`
-mess=`sed '6q;d' info`
-if [ "$fname" == "Larry" ] && [ "$lname" == "McDermin" ] && [ "$relation" == "Friend" ] && [ "$mess" == "You met him in 2014 playing euchre" ]
-then echo "Test passed"
-else
-    echo "Test failed"
-    cat info
-fi
+cat outfile
 
 # Test 27
 curl -sL $host/predict.php -F "pic=@testdata/test/s04/8.pgm" -F "USERNAME=switcher" -o outfile
-awk -f my.awk outfile > info
-fname=`sed '3q;d' info`
-lname=`sed '4q;d' info`
-relation=`sed '5q;d' info`
-mess=`sed '6q;d' info`
-if [ "$fname" == "Johnny" ] && [ "$lname" == "Grim" ] && [ "$relation" == "Grandson" ] && [ "$mess" == "Your sad grandson" ]
-then echo "Test passed"
-else
-    echo "Test failed"
-    cat info
-fi
+cat outfile
 
 # Test 28
 curl -sL $host/predict.php -F "pic=@testdata/test/s06/8.pgm" -F "USERNAME=switch202" -o outfile
-awk -f my.awk outfile > info
-fname=`sed '3q;d' info`
-lname=`sed '4q;d' info`
-relation=`sed '5q;d' info`
-mess=`sed '6q;d' info`
-if [ "$fname" == "Jimmy" ] && [ "$lname" == "Cringles" ] && [ "$relation" == "Grandson" ] && [ "$mess" == "He's a twerp." ]
-then echo "Test passed"
-else
-    echo "Test failed"
-    cat info
-fi
+cat outfile
 
 # Test 29
-curl -sL $host/predict.php -F "pic=@testdata/test/s07/8.pgm" -F "USERNAME=switch202" -o outfile
-awk -f my.awk outfile > info
-fname=`sed '3q;d' info`
-lname=`sed '4q;d' info`
-relation=`sed '5q;d' info`
-mess=`sed '6q;d' info`
-if [ "$fname" == "Kenny" ] && [ "$lname" == "Kreepy" ] && [ "$relation" == "CareTaker" ] && [ "$mess" == "He gives you your medication." ]
-then echo "Test passed"
-else
-    echo "Test failed"
-    cat info
+curl -sL $host/predict.php -F "pic=@testdata/test/s07/9.pgm" -F "USERNAME=switch202" -o outfile
+cat outfile
+
+# Test 30
+out=`curl -s $host/relate.php -F \
+"USERNAME=switch202" -F \
+"ACQUNAME=kk" -F \
+"RELATION=CareTaker" -F \
+"MESSAGE=He gives you your medication." -F \
+"pics[]=@testdata/model/s07/1.pgm" -F \
+"pics[]=@testdata/model/s07/2.pgm" -F \
+"pics[]=@testdata/model/s07/3.pgm"`
+
+# Test 31
+var=$(curl -sL $host/predict.php -F "pic=@testdata/test/s07/9.pgm" -F "USERNAME=switch202" | jq -r .ACQUAINTANCE_FNAME)
+if [ "$var" == Kenny ]
+then echo "GOT IT BITCH!";
+else echo "You lose. good day sir"; echo $var;
 fi
