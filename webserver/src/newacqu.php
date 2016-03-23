@@ -39,12 +39,12 @@ function newAcqua($username, $fname, $lname){
 $fail = false;
 session_start();
 if(newAcqua($id, $fname, $lname)){
-	echo "New Acquaintance Created";
+	echo "True";
 	$dir = "/var/www/html/facePics/".$id;
 	mkdir($dir);
 }
 else{
-	echo "Unable to Create New Acquaintance";
+	echo "False";
 }
 
 
