@@ -1,6 +1,6 @@
 # kill all running containers then remove dangling images
 docker kill $(docker ps -q);
-docker rmi -f $(docker images -q -f dangling=true);
+#docker rmi -f $(docker images -q -f dangling=true);
 
 # restart the server
 docker-compose down && docker-compose build && docker-compose up -d;

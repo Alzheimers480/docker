@@ -9,7 +9,7 @@ host=141.210.25.46
 #host=192.168.99.100
 
 # create users
-# do we really want passord dupe checking server side?
+
 function mytest {
     if [ "$1" == "$2" ]
     then echo "Test passed"
@@ -261,3 +261,4 @@ if [ "$var" == Kenny ]
 then echo "GOT IT BITCH!";
 else echo "You lose. good day sir"; echo $var;
 fi
+

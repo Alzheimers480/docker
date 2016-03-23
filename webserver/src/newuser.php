@@ -44,26 +44,26 @@ $fail=false;
 session_start();
 if(newUser($_POST["USERNAME"], $_POST["PASSWORD"], $_POST["PASSWORD2"], $_POST["FNAME"], $_POST["LNAME"], $_POST["EMAIL"])) {
 	echo "True";
-
 	//make folder for every new user
 	$dir = "/var/www/html/facePics/".$_POST["USERNAME"];
-
 	mkdir($dir);
 	//make csv file
 	$file = $dir."/csv";
-
 	touch($file);
-
 	$mail = $_POST["EMAIL"];
 	$name = $_POST["USERNAME"];
 	$subject = "Welcome to the Who R U";	
-	$message = "192.168.99.100/email.php?USERNAME=$name";
+	$message = "141.210.25.46/email.php?USERNAME=$name";
+	$headers = "";
+	$from = "-f your@email.here";
 	if(mail($mail, $subject, $message)){
-		
+//		echo "Mail worked";	
 	}
 	else{
-		
+//		echo "mail failed";
 	}
+//	exec("mail -s \"Welcome\" \"scnolton@oakland.edu\" <<EOF TEsting  EOF");
+//	echo exec('whoami');
 }
 else{
 	echo "False";
