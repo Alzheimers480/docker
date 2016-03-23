@@ -1,3 +1,11 @@
+<html>
+<body>
+
+<p>thank you for verifying your email address<p>
+
+</body>
+</html>
+
 <?php
 require "index.php";
 $fail=false;
