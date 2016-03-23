@@ -257,8 +257,6 @@ out=`curl -s $host/relate.php -F \
 
 # Test 31
 var=$(curl -sL $host/predict.php -F "pic=@testdata/test/s07/9.pgm" -F "USERNAME=switch202" | jq -r .ACQUAINTANCE_FNAME)
-if [ "$var" == Kenny ]
-then echo "GOT IT BITCH!";
-else echo "You lose. good day sir"; echo $var;
-fi
+echo $var
+
 
