@@ -5,8 +5,9 @@ session_start();
 $id = $_POST["USERNAME"];
 $fname = $_POST["FNAME"];
 $lname = $_POST["LNAME"];
+$gender = $_POST["GENDER"];
 
-function newAcqua($username, $fname, $lname){
+function newAcqua($username, $fname, $lname, $gender){
 	if(empty($username) | empty($fname) | empty($lname)){
 		echo "one or more paramters missing ";
 		return false;
@@ -26,8 +27,8 @@ function newAcqua($username, $fname, $lname){
                 return false;
         }
         $stmnt2->close();
-	$stmnt = $conn->prepare("INSERT INTO ACQUAINTANCE(ACQUAINTANCE_UID, ACQUAINTANCE_FNAME, ACQUAINTANCE_LNAME, PICTURE_SET) VALUES(?,?,?,'/SECS/home/s/scnolton/facePics/$username')");
-	$stmnt->bind_param('sss', $username, $fname, $lname);
+	$stmnt = $conn->prepare("INSERT INTO ACQUAINTANCE(ACQUAINTANCE_UID, ACQUAINTANCE_FNAME, ACQUAINTANCE_LNAME, GENDER, PICTURE_SET) VALUES(?,?,?,?,'/SECS/home/s/scnolton/facePics/$username')");
+	$stmnt->bind_param('ssss', $username, $fname, $lname, $gender);
 	$stmnt->execute();
 	$stmnt->close();
 	$conn->close();
@@ -38,7 +39,7 @@ function newAcqua($username, $fname, $lname){
 
 $fail = false;
 session_start();
-if(newAcqua($id, $fname, $lname)){
+if(newAcqua($id, $fname, $lname, $gender)){
 	echo "True";
 	$dir = "/var/www/html/facePics/".$id;
 	mkdir($dir);

@@ -1,1 +1,1 @@
-docker attach mydockers_web_1
+sudo docker attach docker_web_1

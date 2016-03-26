@@ -19,6 +19,8 @@ function mytest {
     fi
 }
 
+# Test 1
+echo "Test 1"
 expect="True"
 out=`curl -s $host/newuser.php -F \
 "USERNAME=switch202" -F \
@@ -29,6 +31,8 @@ out=`curl -s $host/newuser.php -F \
 "EMAIL=scnolton@oakland.edu"`
 mytest "$out" "$expect"
 
+# Test 2
+echo "Test 2"
 expect="True"
 out=`curl -s $host/newuser.php -F \
 "USERNAME=switcher" -F \
@@ -39,13 +43,18 @@ out=`curl -s $host/newuser.php -F \
 "EMAIL=scnolton@oakland.edu"`
 mytest "$out" "$expect"
 
-expect="New Acquaintance Created"
+# Test 3
+echo "Test 3"
+expect="True"
 out=`curl -s $host/newacqu.php -F \
 "USERNAME=ruby" -F \
 "FNAME=Mark" -F \
-"LNAME=Zineberg"`
+"LNAME=Zineberg" -F \
+"GENDER=male"`
 mytest "$out" "$expect"
 
+# Test 4
+echo "Test 4"
 expect="user already exists False"
 out=`curl -s $host/newuser.php -F \
 "USERNAME=switch202" -F \
@@ -56,6 +65,8 @@ out=`curl -s $host/newuser.php -F \
 "EMAIL=scnolton@oakland.edu"`
 mytest "$out" "$expect"
 
+# Test 5
+echo "Test 5"
 expect="False"
 out=`curl -s $host/auth.php -F \
 "USERNAME=switch202" -F \
@@ -64,68 +75,64 @@ mytest "$out" "$expect"
 
 # Test auth with wrong password
 # This test is failing
+# Test 6
+echo "Test 6"
 expect="False"
 out=`curl -s $host/auth.php -F \
 "USERNAME=switch202" -F \
 "PASSWORD=passwordiord"`
 mytest "$out" "$expect"
 
+# Test 7
+echo "Test 7"
 expect="True"
 out=`curl -s $host/auth.php -F \
 "USERNAME=switch202" -F \
 "PASSWORD=password"`
 mytest "$out" "$expect"
 
-
-# Changepass doesn't ask for the old password?
+# Test 11
+echo "Test 11"
 expect="True"
-out=`curl -s $host/changepass.php -F \
-"USERNAME=switch202" -F \
-"PASSWORD=monster" -F \
-"PASSWORD2=monster"`
-mytest "$out" "$expect"
-
-expect="False"
-out=`curl -s $host/auth.php -F \
-"USERNAME=switch202" -F \
-"PASSWORD=password"`
-mytest "$out" "$expect"
-
-expect="True"
-out=`curl -s $host/auth.php -F \
-"USERNAME=switch202" -F \
-"PASSWORD=monster"`
-mytest "$out" "$expect"
-
-expect="New Acquaintance Created"
 out=`curl -s $host/newacqu.php -F \
 "USERNAME=looby" -F \
 "FNAME=Larry" -F \
-"LNAME=McDermin"`
+"LNAME=McDermin" -F \
+"GENDER=male"`
 mytest "$out" "$expect"
 
-expect="New Acquaintance Created"
+# Test 12
+echo "Test 12"
+expect="True"
 out=`curl -s $host/newacqu.php -F \
 "USERNAME=scooby" -F \
 "FNAME=Smiles" -F \
-"LNAME=McDermin"`
+"LNAME=McDermin" -F \
+"GENDER=male"`
 mytest "$out" "$expect"
 
-expect="New Acquaintance Created"
+# Test 13
+echo "Test 13"
+expect="True"
 out=`curl -s $host/newacqu.php -F \
 "USERNAME=limby" -F \
 "FNAME=Johnny" -F \
-"LNAME=Grim"`
+"LNAME=Grim" -F \
+"GENDER=female"`
 mytest "$out" "$expect"
 
-expect="New Acquaintance Created"
+# Test 14
+echo "Test 14"
+expect="True"
 out=`curl -s $host/newacqu.php -F \
 "USERNAME=jc" -F \
 "FNAME=Jimmy" -F \
-"LNAME=Cringles"`
+"LNAME=Cringles" -F \
+"GENDER=male"`
 mytest "$out" "$expect"
 
-# Test 15 
+# Test 15
+echo "Test 15"
 expect="Acuqintance ID does not exists False"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
@@ -138,14 +145,17 @@ out=`curl -s $host/relate.php -F \
 mytest "$out" "$expect"
 
 # Test 16
-expect="New Acquaintance Created"
+echo "Test 16"
+expect="True"
 out=`curl -s $host/newacqu.php -F \
 "USERNAME=kk" -F \
 "FNAME=Kenny" -F \
-"LNAME=Kreepy"`
+"LNAME=Kreepy" -F \
+"GENDER=male"`
 mytest "$out" "$expect"
 
 # Test 17
+echo "Test 17"
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
@@ -158,6 +168,7 @@ out=`curl -s $host/relate.php -F \
 mytest "$out" "$expect"
 
 # Test 18
+echo "Test 18"
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
@@ -170,6 +181,7 @@ out=`curl -s $host/relate.php -F \
 mytest "$out" "$expect"
 
 # Test 19
+echo "Test 19"
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
@@ -182,6 +194,7 @@ out=`curl -s $host/relate.php -F \
 mytest "$out" "$expect"
 
 # Test 20
+echo "Test 20"
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switcher" -F \
@@ -194,6 +207,7 @@ out=`curl -s $host/relate.php -F \
 mytest "$out" "$expect"
 
 # Test 21
+echo "Test 21"
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switcher" -F \
@@ -206,6 +220,7 @@ out=`curl -s $host/relate.php -F \
 mytest "$out" "$expect"
 
 # Test 22
+echo "Test 22"
 expect="True"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
@@ -218,34 +233,42 @@ out=`curl -s $host/relate.php -F \
 mytest "$out" "$expect"
 
 # Test 23
+echo "Test 23"
 curl -sL $host/predict.php -F "pic=@testdata/test/s02/8.pgm" -F "USERNAME=switch202" -o outfile
 cat outfile
 
 # Test 24
+echo "Test 24"
 curl -sL $host/predict.php -F "pic=@testdata/test/s03/8.pgm" -F "USERNAME=switch202" -o outfile
 cat outfile
 
 # Test 25
+echo "Test 25"
 curl -sL $host/predict.php -F "pic=@testdata/test/s01/8.pgm" -F "USERNAME=switch202" -o outfile
 cat outfile
 
 # Test 26
+echo "Test 26"
 curl -sL $host/predict.php -F "pic=@testdata/test/s02/8.pgm" -F "USERNAME=switcher" -o outfile
 cat outfile
 
 # Test 27
+echo "Test 27"
 curl -sL $host/predict.php -F "pic=@testdata/test/s04/8.pgm" -F "USERNAME=switcher" -o outfile
 cat outfile
 
 # Test 28
+echo "Test 28"
 curl -sL $host/predict.php -F "pic=@testdata/test/s06/8.pgm" -F "USERNAME=switch202" -o outfile
 cat outfile
 
 # Test 29
+echo "Test 29"
 curl -sL $host/predict.php -F "pic=@testdata/test/s07/9.pgm" -F "USERNAME=switch202" -o outfile
 cat outfile
 
 # Test 30
+echo "Test 30"
 out=`curl -s $host/relate.php -F \
 "USERNAME=switch202" -F \
 "ACQUNAME=kk" -F \
@@ -256,7 +279,5 @@ out=`curl -s $host/relate.php -F \
 "pics[]=@testdata/model/s07/3.pgm"`
 
 # Test 31
-var=$(curl -sL $host/predict.php -F "pic=@testdata/test/s07/9.pgm" -F "USERNAME=switch202" | jq -r .ACQUAINTANCE_FNAME)
-echo $var
-
-
+echo "Test 31"
+curl -sL $host/predict.php -F "pic=@testdata/test/s07/9.pgm" -F "USERNAME=switch202"
