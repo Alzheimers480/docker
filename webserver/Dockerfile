@@ -25,7 +25,7 @@ COPY src/ /var/www/html/
 # From master
 RUN mkdir /var/www/html/facePics
 RUN chmod -R 777 /var
-RUN apt-get -y install mailutils
+RUN apt-get update && apt-get -y install mailutils
 RUN apt-get -y install expect
 COPY config/emailConfig.sh /
 RUN cd /
