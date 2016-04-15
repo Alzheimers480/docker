@@ -167,8 +167,7 @@ out=`curl -s $host/relate.php -F \
 "RELATION=coworker" -F \
 "MESSAGE=Tallest man in the world" -F \
 "pics[]=@pics/joash_dace/1.jpg" -F \
-"pics[]=@pics/joash_dace/2.jpg" -F \
-"pics[]=@pics/joash_dace/3.jpg"`
+"pics[]=@pics/joash_dace/2.jpg"`
 echo $out
 
 out=`curl -s $host/relate.php -F \
@@ -181,3 +180,8 @@ out=`curl -s $host/relate.php -F \
 "pics[]=@pics/vani_yedam/3.jpg"`
 echo $out
 
+out=`curl -s $host/modacqu.php -F \
+"USERNAME=scnolton" -F \
+"ACQUNAME=joash" -F \
+"pics[]=@pics/joash_dace/3.jpg"`
+echo $out
