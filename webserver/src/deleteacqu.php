@@ -1,13 +1,5 @@
 <?php
-require "index.php"
-
-public static function delTree($dir) { 
-   $files = array_diff(scandir($dir), array('.','..')); 
-    foreach ($files as $file) { 
-      (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file"); 
-    } 
-    return rmdir($dir); 
-  } 
+require "index.php"; 
 
 function deleteAcqu($acquId){
 	if(empty($acquId)){
@@ -20,6 +12,16 @@ function deleteAcqu($acquId){
                 echo "conn failure ";
                 return false;
         }
+	$stmnt3=$conn->prepare("SELECT * FROM ACQUAINTANCE WHERE ACQUAINTANCE_UID = ?;");
+        $stmnt3->bind_param('s', $aacquId);
+        $stmnt3->execute();
+        $stmnt3->store_result();
+        $amount = $stmnt3->num_rows;
+        if($amount==0){
+                echo "Acquaintance does not exist ";
+                return false;
+        }
+        $stmnt3->close();
 	$stmnt=$conn->prepare("DELETE FROM RELATIONSHIP WHERE ACQUAINTANCE_UID = ?;");
         $stmnt->bind_param('s', $acquId);
         $stmnt->execute();
@@ -30,7 +32,7 @@ function deleteAcqu($acquId){
         $stmnt2->close();
         $conn->close();
 	$dir = "/var/www/html/facePics/".$acquId;
-	delTree($dir);
+	exec("rm -r $dir");
         return true;
 }
 

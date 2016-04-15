@@ -31,7 +31,7 @@ static void read_csv(const string& filename, vector<Mat>& images, vector<int>& l
 
 int main(int argc, const char *argv[]) {
 
-  Ptr<FaceRecognizer> model = createLBPHFaceRecognizer();
+  Ptr<FaceRecognizer> model = createFisherFaceRecognizer(80,DBL_MAX);
   vector<Mat> images;
   vector<int> labels;
 
