@@ -6,7 +6,7 @@ function predict($file,$user) {
 	 $guess = exec("/var/www/facerec/faces predict ".$file." ".$user, $output);
 	 $guess = $output[0];
 	 $conn = connectToDB();
-	 $sql = "SELECT ACQUAINTANCE_FNAME, ACQUAINTANCE_LNAME, GENDER, RELATION, DESCRIPTION FROM RELATIONSHIP NATURAL JOIN ACQUAINTANCE WHERE USER_UID = '".$user."' AND REL_ID=".$guess.";";
+	 $sql = "SELECT ACQUAINTANCE_FNAME, ACQUAINTANCE_LNAME, GENDER, RELATION, DESCRIPTION, ACQUAINTANCE_UID FROM RELATIONSHIP NATURAL JOIN ACQUAINTANCE WHERE USER_UID = '".$user."' AND REL_ID=".$guess.";";
 	 $result=$conn->query($sql);
 	 $row = $result->fetch_assoc();
 	 $row["DISTANCE"] = $output[1];
